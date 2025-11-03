@@ -75,7 +75,7 @@ export default function Header() {
                 {/* Cart Icon */}
                 <div className="relative" ref={cartRef}>
                     <Button
-                        variant="ghost"
+                        variant="secondary"
                         size="sm"
                         className="text-white relative"
                         onClick={() => setIsCartOpen(!isCartOpen)}
