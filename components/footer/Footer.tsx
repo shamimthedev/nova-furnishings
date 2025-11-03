@@ -1,10 +1,13 @@
+'use client'
+
 import Link from 'next/link'
 import { 
   Instagram, 
   Linkedin, 
   Facebook, 
   Youtube,
-  Shield
+  Shield,
+  Sparkles
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
@@ -45,19 +48,19 @@ const footerLinks = [
   {
     title: 'Company',
     links: [
-      { name: 'About Us', href: '/about' },
-      { name: 'Careers', href: '/careers' },
-      { name: 'Sustainability', href: '/sustainability' },
-      { name: 'Press', href: '/press' }
+      { name: 'About Us', href: '/' },
+      { name: 'Careers', href: '/' },
+      { name: 'Sustainability', href: '/' },
+      { name: 'Press', href: '/' }
     ]
   },
   {
     title: 'Support',
     links: [
-      { name: 'Contact Us', href: '/contact' },
-      { name: 'Shipping & Returns', href: '/shipping' },
-      { name: 'Warranty', href: '/warranty' },
-      { name: 'FAQ', href: '/faq' }
+      { name: 'Contact Us', href: '/' },
+      { name: 'Shipping & Returns', href: '/' },
+      { name: 'Warranty', href: '/' },
+      { name: 'FAQ', href: '/' }
     ]
   },
   {
@@ -168,18 +171,58 @@ export default function Footer() {
             © {new Date().getFullYear()} Nova Furnishings. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm">
-            <Link href="/privacy" className="text-white/70 hover:text-accent transition-colors">
+            <Link href="/" className="text-white/70 hover:text-accent transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="text-white/70 hover:text-accent transition-colors">
+            <Link href="/" className="text-white/70 hover:text-accent transition-colors">
               Terms of Service
             </Link>
-            <Link href="/cookies" className="text-white/70 hover:text-accent transition-colors">
+            <Link href="/" className="text-white/70 hover:text-accent transition-colors">
               Cookie Policy
             </Link>
           </div>
         </div>
+
+        {/* Agency Credit with Animation */}
+        <div className="mt-6 pt-6 border-t border-white/10">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-sm">
+            <span className="text-white/60 flex items-center gap-2">
+              Crafted with 
+              <span className="inline-block animate-pulse text-accent">❤️</span>
+              by
+            </span>
+            <a 
+              href="https://bebshardost.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="group relative inline-flex items-center gap-2 font-semibold text-white hover:text-accent transition-colors duration-300"
+            >
+              <Sparkles className="h-4 w-4 text-accent animate-spin-slow" />
+              <span className="relative">
+                Bebshar Dost
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
+              </span>
+              <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
+                →
+              </span>
+            </a>
+          </div>
+        </div>
       </div>
+
+      <style jsx>{`
+        @keyframes spin-slow {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+        .animate-spin-slow {
+          animation: spin-slow 3s linear infinite;
+        }
+      `}</style>
     </footer>
   )
 }
