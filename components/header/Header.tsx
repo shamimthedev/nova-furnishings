@@ -6,6 +6,8 @@ import Image from 'next/image'
 import { ShoppingCart, Menu, X, Trash2, Plus, Minus } from 'lucide-react'
 import { useCartStore } from '@/lib/store/cart-store'
 import { Button } from '@/components/ui/button'
+import { toast } from 'sonner'
+import { CartToast } from '@/components/ui/CartToast'
 
 const navItems = [
     { name: 'BEDROOM', path: '/products?category=beds' },
@@ -13,13 +15,13 @@ const navItems = [
     { name: 'KITCHEN', path: '/products?category=kitchen' },
     { name: 'BATHROOM', path: '/products?category=storage' },
     { name: 'ALL PRODUCTS', path: '/products' },
-    { name: 'My Cart', path: '/cart' },
 ]
 
 export default function Header() {
     const { cartItems, totalQuantity, removeFromCart, increaseQuantity, decreaseQuantity } = useCartStore()
     const [isCartOpen, setIsCartOpen] = useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+    const [cartAnimation, setCartAnimation] = useState(false)
     const cartRef = useRef<HTMLDivElement>(null)
 
     // Close cart when clicking outside
@@ -33,10 +35,41 @@ export default function Header() {
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [])
 
+    // Cart icon animation on item add
+    useEffect(() => {
+        const handleCartItemAdded = (e: Event) => {
+            const customEvent = e as CustomEvent
+            const { productName, productImage, productPrice } = customEvent.detail
+            
+            // Trigger animation
+            setCartAnimation(true)
+            setTimeout(() => setCartAnimation(false), 600)
+            
+            // Show toast
+            toast.success(
+                <CartToast
+                    productName={productName}
+                    productImage={productImage}
+                    productPrice={productPrice}
+                    onViewCart={() => {
+                        window.location.href = '/cart'
+                        toast.dismiss()
+                    }}
+                />,
+                {
+                    duration: 5000,
+                }
+            )
+        }
+        
+        window.addEventListener('cartItemAdded', handleCartItemAdded as EventListener)
+        return () => window.removeEventListener('cartItemAdded', handleCartItemAdded as EventListener)
+    }, [])
+
     const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
 
     return (
-        <header className="bg-secondary sticky top-0 left-0 w-full z-50 shadow-sm">
+        <header className="bg-secondary fixed top-0 left-0 right-0 w-full z-50 shadow-md">
             <div className="container-custom py-4 flex items-center justify-between">
                 {/* Mobile Menu Button */}
                 <Button
@@ -77,12 +110,16 @@ export default function Header() {
                     <Button
                         variant="secondary"
                         size="sm"
-                        className="text-white relative"
+                        className={`text-white relative transition-transform ${
+                            cartAnimation ? 'animate-bounce' : ''
+                        }`}
                         onClick={() => setIsCartOpen(!isCartOpen)}
                     >
                         <ShoppingCart className="h-5 w-5" />
                         {totalQuantity > 0 && (
-                            <span className="absolute -top-2 -right-2 bg-accent text-white text-xs font-bold h-5 w-5 rounded-full flex items-center justify-center">
+                            <span className={`absolute -top-2 -right-2 bg-accent text-white text-xs font-bold h-5 w-5 rounded-full flex items-center justify-center transition-transform ${
+                                cartAnimation ? 'scale-125' : 'scale-100'
+                            }`}>
                                 {totalQuantity}
                             </span>
                         )}
@@ -149,15 +186,31 @@ export default function Header() {
                                         </div>
 
                                         <div className="mt-4 pt-3 border-t border-border">
-                                            <div className="flex justify-between items-center mb-3">
+                                            <div className="flex justify-between items-center mb-4">
                                                 <span className="font-semibold text-text">Total:</span>
                                                 <span className="text-lg font-bold text-primary">${totalPrice.toFixed(2)}</span>
                                             </div>
-                                            <Link href="/checkout">
-                                                <Button className="w-full bg-accent hover:bg-accent-light">
-                                                    Checkout
-                                                </Button>
-                                            </Link>
+                                            
+                                            {/* Two-button layout */}
+                                            <div className="flex gap-2">
+                                                <Link href="/cart" className="flex-1">
+                                                    <Button 
+                                                        variant="outline" 
+                                                        className="w-full border-secondary text-secondary hover:bg-secondary hover:text-white"
+                                                        onClick={() => setIsCartOpen(false)}
+                                                    >
+                                                        View Cart
+                                                    </Button>
+                                                </Link>
+                                                <Link href="/checkout" className="flex-1">
+                                                    <Button 
+                                                        className="w-full bg-accent hover:bg-accent-light"
+                                                        onClick={() => setIsCartOpen(false)}
+                                                    >
+                                                        Checkout
+                                                    </Button>
+                                                </Link>
+                                            </div>
                                         </div>
                                     </>
                                 )}
