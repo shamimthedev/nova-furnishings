@@ -14,6 +14,7 @@ const navItems = [
   { name: 'KITCHEN', path: '/products?category=kitchen' },
   { name: 'BATHROOM', path: '/products?category=storage' },
   { name: 'ALL PRODUCTS', path: '/products' },
+  { name: 'My Cart', path: '/cart' },
 ]
 
 export default function Header() {
@@ -152,9 +153,11 @@ export default function Header() {
                                                 <span className="font-semibold text-text">Total:</span>
                                                 <span className="text-lg font-bold text-primary">${totalPrice.toFixed(2)}</span>
                                             </div>
+                                            <Link href="/checkout">
                                             <Button className="w-full bg-accent hover:bg-accent-light">
                                                 Checkout
                                             </Button>
+                                            </Link>
                                         </div>
                                     </>
                                 )}
