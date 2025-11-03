@@ -12,27 +12,53 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
+const siteUrl = 'https://nova-furnishings.vercel.app'
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: 'Nova Furnishings | Modern Furniture Store',
     template: '%s | Nova Furnishings'
   },
-  description: 'Discover beautifully crafted modern furniture for every room. Premium quality, sustainable materials, and timeless design.',
-  keywords: ['furniture', 'home decor', 'modern furniture', 'living room', 'bedroom', 'dining room'],
-  authors: [{ name: 'Nova Furnishings' }],
+  description: 'Discover beautifully crafted modern furniture for every room. Premium quality, sustainable materials, and timeless design. Shop beds, sofas, tables, chairs, and more.',
+  keywords: [
+    'furniture',
+    'home decor',
+    'modern furniture',
+    'living room furniture',
+    'bedroom furniture',
+    'dining room furniture',
+    'office furniture',
+    'sustainable furniture',
+    'premium furniture',
+    'furniture store',
+    'nova furnishings',
+    'buy furniture online',
+  ],
+  authors: [
+    { name: 'Nova Furnishings' },
+    { name: 'Bebshar Dost', url: 'https://bebshardost.com' }
+  ],
+  creator: 'Bebshar Dost',
+  publisher: 'Nova Furnishings',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://novafurnishings.com',
+    url: siteUrl,
     siteName: 'Nova Furnishings',
     title: 'Nova Furnishings | Modern Furniture Store',
-    description: 'Discover beautifully crafted modern furniture for every room.',
+    description: 'Discover beautifully crafted modern furniture for every room. Premium quality, sustainable materials, and timeless design.',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Nova Furnishings',
+        alt: 'Nova Furnishings - Modern Furniture Store',
       },
     ],
   },
@@ -41,7 +67,29 @@ export const metadata: Metadata = {
     title: 'Nova Furnishings | Modern Furniture Store',
     description: 'Discover beautifully crafted modern furniture for every room.',
     images: ['/twitter-image.jpg'],
+    creator: '@novafurnishings',
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    // Add your verification codes here after creating accounts
+    google: 'your-google-verification-code',
+    // yandex: 'your-yandex-verification-code',
+    // bing: 'your-bing-verification-code',
+  },
+  alternates: {
+    canonical: siteUrl,
+  },
+  category: 'furniture',
 }
 
 export default function RootLayout({
