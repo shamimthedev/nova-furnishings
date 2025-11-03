@@ -6,15 +6,14 @@ import Image from 'next/image'
 import { ShoppingCart, Menu, X, Trash2, Plus, Minus } from 'lucide-react'
 import { useCartStore } from '@/lib/store/cart-store'
 import { Button } from '@/components/ui/button'
-import Logo from '@/public/assets/images/housedecor-logo.png'
 
 const navItems = [
-  { name: 'BEDROOM', path: '/products?category=beds' },
-  { name: 'LIVING ROOM', path: '/products?category=sofas' },
-  { name: 'KITCHEN', path: '/products?category=kitchen' },
-  { name: 'BATHROOM', path: '/products?category=storage' },
-  { name: 'ALL PRODUCTS', path: '/products' },
-  { name: 'My Cart', path: '/cart' },
+    { name: 'BEDROOM', path: '/products?category=beds' },
+    { name: 'LIVING ROOM', path: '/products?category=sofas' },
+    { name: 'KITCHEN', path: '/products?category=kitchen' },
+    { name: 'BATHROOM', path: '/products?category=storage' },
+    { name: 'ALL PRODUCTS', path: '/products' },
+    { name: 'My Cart', path: '/cart' },
 ]
 
 export default function Header() {
@@ -49,14 +48,15 @@ export default function Header() {
                     <Menu className="h-6 w-6" />
                 </Button>
 
-                {/* Logo */}
-                <Link href="/" className="flex-1 md:flex-none text-center md:text-left">
-                    <Image
-                        src={Logo}
-                        alt="Nova Furnishings"
-                        className="w-32 md:w-40 h-auto"
-                        priority
-                    />
+                {/* Logo - Responsive sizing for very small screens */}
+                <Link
+                    href="/"
+                    className="flex-1 md:flex-none text-center md:text-left"
+                >
+                    <h1 className="text-[1.2rem] xs:text-[1.4rem] sm:text-[1.6rem] md:text-[2rem] tracking-[0.08em] uppercase text-background">
+                        <span className="text-white font-bold">NOVA</span>
+                        <span className="text-border">FURNISHINGS</span>
+                    </h1>
                 </Link>
 
                 {/* Desktop Navigation */}
@@ -154,9 +154,9 @@ export default function Header() {
                                                 <span className="text-lg font-bold text-primary">${totalPrice.toFixed(2)}</span>
                                             </div>
                                             <Link href="/checkout">
-                                            <Button className="w-full bg-accent hover:bg-accent-light">
-                                                Checkout
-                                            </Button>
+                                                <Button className="w-full bg-accent hover:bg-accent-light">
+                                                    Checkout
+                                                </Button>
                                             </Link>
                                         </div>
                                     </>
@@ -172,15 +172,20 @@ export default function Header() {
                 <div className="fixed inset-0 bg-black bg-opacity-50 z-50 md:hidden">
                     <div className="bg-white w-4/5 max-w-sm h-full p-6 animate-slide-up">
                         <div className="flex justify-between items-center mb-8">
-                            <Image
-                                src={Logo}
-                                alt="Nova Furnishings"
-                                className="w-32"
-                            />
+                            {/* Text-based Logo - Better contrast for mobile menu */}
+                            <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
+                                <h1 className="text-[1.2rem] xs:text-[1.3rem] sm:text-[1.5rem] tracking-[0.08em] uppercase">
+                                    <span className="text-secondary font-bold">NOVA</span>
+                                    <span className="text-primary">FURNISHINGS</span>
+                                </h1>
+                            </Link>
+
+                            {/* Close Button */}
                             <Button
                                 variant="ghost"
                                 size="sm"
                                 onClick={() => setIsMobileMenuOpen(false)}
+                                className="text-secondary hover:text-primary"
                             >
                                 <X className="h-6 w-6" />
                             </Button>
