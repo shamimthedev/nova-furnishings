@@ -37,6 +37,36 @@ export interface CartStore {
   clearCart: () => void
 }
 
+// Order Types
+export interface Order {
+  id: string
+  customer: {
+    name: string
+    email: string
+    phone: string
+    address: string
+    city: string
+    district: string
+  }
+  items: CartItem[]
+  total: number
+  status: 'pending' | 'confirmed' | 'shipped' | 'delivered' | 'cancelled'
+  paymentMethod: 'cod' | 'bkash' | 'nagad'
+  paymentStatus: 'pending' | 'paid' | 'failed'
+  createdAt: string
+  updatedAt: string
+  notes?: string
+}
+
+// Admin Types
+export interface AdminUser {
+  id: string
+  username: string
+  password: string
+  name: string
+  role: 'admin' | 'manager'
+}
+
 // Navigation Types
 export interface NavItem {
   name: string
@@ -59,4 +89,29 @@ export interface ContactFormData {
 
 export interface NewsletterFormData {
   email: string
+}
+
+// Analytics Types
+export interface AnalyticsData {
+  totalSales: number
+  totalOrders: number
+  pendingOrders: number
+  deliveredOrders: number
+  monthlySales: Array<{
+    month: string
+    sales: number
+  }>
+  popularProducts: Array<{
+    name: string
+    sales: number
+  }>
+  customerStats: {
+    totalCustomers: number
+    newCustomers: number
+    returningCustomers: number
+  }
+  revenueByCategory: Array<{
+    category: string
+    revenue: number
+  }>
 }
