@@ -5,8 +5,9 @@ import Header from '@/components/header/Header'
 import Footer from '@/components/footer/Footer'
 import BackToTop from '@/components/ui/BackToTop'
 import { Toaster } from 'sonner'
+import StructuredData from '@/components/StructuredData'
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
@@ -99,17 +100,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable}>
+      <head>
+        <StructuredData />
+      </head>
       <body className="min-h-screen bg-background antialiased">
         <div className="flex flex-col min-h-screen">
-          <Header/>
+          <Header />
           <main className="pt-20 flex-1">
             {children}
           </main>
-          <Footer/>
+          <Footer />
           <BackToTop />
-          <Toaster 
-            position="top-right" 
-            richColors 
+          <Toaster
+            position="top-right"
+            richColors
             closeButton
             toastOptions={{
               style: {
