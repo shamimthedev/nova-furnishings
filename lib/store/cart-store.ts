@@ -47,6 +47,19 @@ export const useCartStore = create<CartStore>()(
             totalPrice: get().totalPrice + product.price,
           })
         }
+
+        // Trigger toast notification and cart animation
+        if (typeof window !== 'undefined') {
+          // Dispatch custom event with product data
+          const event = new CustomEvent('cartItemAdded', { 
+            detail: {
+              productName: product.title,
+              productImage: product.src,
+              productPrice: product.price,
+            }
+          })
+          window.dispatchEvent(event)
+        }
       },
 
       removeFromCart: (id: string) => {
