@@ -1,4 +1,4 @@
-import CheckoutContent from '@/components/CheckoutContent'
+import CheckoutContent from '@/components/checkout/CheckoutContent'
 
 export const metadata = {
   title: 'Checkout | Nova Furnishings',

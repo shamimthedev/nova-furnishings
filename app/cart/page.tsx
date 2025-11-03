@@ -1,4 +1,4 @@
-import CartContent from '@/components/CartContent'
+import CartContent from '@/components/cart/CartContent'
 
 export const metadata = {
   title: 'Shopping Cart | Nova Furnishings',
