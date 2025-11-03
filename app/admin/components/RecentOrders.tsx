@@ -20,10 +20,6 @@ export default function RecentOrders() {
     }
   }
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-BD')
-  }
-
   return (
     <div className="card p-6">
       <div className="flex items-center justify-between mb-6">

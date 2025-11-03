@@ -16,7 +16,7 @@ export function calculateDiscount(originalPrice: number, salePrice: number): num
   return Math.round(((originalPrice - salePrice) / originalPrice) * 100)
 }
 
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {

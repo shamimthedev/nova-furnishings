@@ -2,6 +2,7 @@
 
 import { useParams, useRouter } from 'next/navigation'
 import { useAdminStore } from '@/lib/store/admin-store'
+import { Order } from '@/types'
 import AdminLayout from './AdminLayout'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, Printer, Mail } from 'lucide-react'
@@ -27,7 +28,7 @@ export default function OrderDetails() {
       <AdminLayout>
         <div className="text-center py-12">
           <h1 className="text-2xl font-bold text-primary mb-4">Order Not Found</h1>
-          <p className="text-text-light mb-6">The order you're looking for doesn't exist.</p>
+          <p className="text-text-light mb-6">The order you&apos;re looking for doesn&apos;t exist.</p>
           <Button asChild>
             <Link href="/admin/orders">Back to Orders</Link>
           </Button>
@@ -58,7 +59,7 @@ export default function OrderDetails() {
   }
 
   const handleStatusUpdate = (newStatus: string) => {
-    updateOrderStatus(order.id, newStatus as any)
+    updateOrderStatus(order.id, newStatus as Order['status'])
   }
 
   return (

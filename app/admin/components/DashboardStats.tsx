@@ -1,6 +1,5 @@
 'use client'
 
-import { useAdminStore } from '@/lib/store/admin-store'
 import { analytics } from '@/lib/mock-data'
 import { Package, ShoppingCart, Truck, CheckCircle } from 'lucide-react'
 
@@ -36,7 +35,6 @@ const stats = [
 ]
 
 export default function DashboardStats() {
-  const { orders } = useAdminStore()
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

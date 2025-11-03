@@ -7,7 +7,7 @@ import { AdminUser, Order } from '@/types'
 interface AdminStore {
   isLoggedIn: boolean
   currentUser: AdminUser | null
-  login: (username: string, password: string) => boolean
+  login: (username: string, password: string) => Promise<boolean>
   logout: () => void
   orders: Order[]
   updateOrderStatus: (orderId: string, status: Order['status']) => void
@@ -20,20 +20,25 @@ export const useAdminStore = create<AdminStore>()(
       currentUser: null,
       orders: [], // Will be populated from mock data
 
-      login: (username: string, password: string) => {
-        // Import here to avoid circular dependencies
-        const { verifyAdminLogin } = require('@/lib/mock-data')
-        const user = verifyAdminLogin(username, password)
-        
-        if (user) {
-          set({ 
-            isLoggedIn: true, 
-            currentUser: user,
-            orders: require('@/lib/mock-data').orders
-          })
-          return true
+      login: async (username: string, password: string) => {
+        try {
+          // Dynamic import to avoid circular dependencies
+          const { verifyAdminLogin, orders } = await import('@/lib/mock-data')
+          const user = verifyAdminLogin(username, password)
+          
+          if (user) {
+            set({ 
+              isLoggedIn: true, 
+              currentUser: user,
+              orders: orders
+            })
+            return true
+          }
+          return false
+        } catch (error) {
+          console.error('Login failed:', error)
+          return false
         }
-        return false
       },
 
       logout: () => {

@@ -27,16 +27,20 @@ export default function AdminLogin() {
       return
     }
 
-    // Simulate API call
-    setTimeout(() => {
-      const success = login(username, password)
+    try {
+      // Call the async login function
+      const success = await login(username, password)
       if (success) {
         router.push('/admin/dashboard')
       } else {
         setError('Invalid username or password')
       }
+    } catch (err) {
+      setError('An error occurred during login. Please try again.')
+      console.error('Login error:', err)
+    } finally {
       setIsLoading(false)
-    }, 1000)
+    }
   }
 
   return (

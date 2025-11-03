@@ -5,12 +5,18 @@ import { CartStore, Product } from '@/types'
 // Define the current version of the store structure
 const CURRENT_VERSION = 1
 
+// Define the persisted state type
+interface PersistedCartState {
+  cartItems: Array<Product & { quantity: number }>
+  totalQuantity: number
+  totalPrice: number
+}
+
 // Migration function to handle future store structure changes
 const migrations = {
-  0: (state: any): any => {
+  0: (state: Partial<PersistedCartState>): PersistedCartState => {
     // Migration from version 0 to 1
     return {
-      ...state,
       // Ensure all required fields exist with defaults
       cartItems: state.cartItems || [],
       totalQuantity: state.totalQuantity || 0,
@@ -124,15 +130,15 @@ export const useCartStore = create<CartStore>()(
     {
       name: 'cart-storage',
       version: CURRENT_VERSION,
-      migrate: (persistedState: any, version: number) => {
+      migrate: (persistedState: unknown, version: number) => {
         try {
           // If no version, assume it's version 0
-          if (version === undefined) version = 0
+          let currentVersion = version === undefined ? 0 : version
           
-          let state = persistedState
+          let state = persistedState as Partial<PersistedCartState>
           
           // Apply migrations in order
-          for (let i = version; i < CURRENT_VERSION; i++) {
+          for (let i = currentVersion; i < CURRENT_VERSION; i++) {
             const migration = migrations[i as keyof typeof migrations]
             if (migration) {
               state = migration(state)

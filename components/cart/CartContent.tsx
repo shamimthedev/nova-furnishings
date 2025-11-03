@@ -24,7 +24,7 @@ export default function CartContent() {
           <ShoppingBag className="h-24 w-24 text-border mx-auto mb-6" />
           <h1 className="text-3xl font-bold text-primary mb-4">Your cart is empty</h1>
           <p className="text-text-light mb-8 max-w-md mx-auto">
-            Looks like you haven't added any items to your cart yet. Start shopping to find amazing furniture for your home.
+            Looks like you haven&apos;t added any items to your cart yet. Start shopping to find amazing furniture for your home.
           </p>
           <Button asChild size="lg">
             <Link href="/products">

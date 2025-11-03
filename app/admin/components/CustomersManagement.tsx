@@ -11,6 +11,7 @@ export default function CustomersManagement() {
   const router = useRouter()
   const isLoggedIn = useAdminStore((state) => state.isLoggedIn)
   const { orders } = useAdminStore()
+  const [searchTerm, setSearchTerm] = useState('')
 
   if (!isLoggedIn) {
     router.push('/admin')
@@ -30,8 +31,6 @@ export default function CustomersManagement() {
         .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())[0]?.createdAt
     }])
   ).values())
-
-  const [searchTerm, setSearchTerm] = useState('')
 
   const filteredCustomers = customers.filter(customer =>
     customer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||

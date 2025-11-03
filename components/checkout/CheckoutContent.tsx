@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { useCartStore } from '@/lib/store/cart-store'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
@@ -11,7 +10,6 @@ import Link from 'next/link'
 type PaymentMethod = 'cod' | 'bkash' | 'nagad' | null
 
 export default function CheckoutContent() {
-  const router = useRouter()
   const { cartItems, totalQuantity, totalPrice, clearCart } = useCartStore()
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(null)
   const [isProcessing, setIsProcessing] = useState(false)
@@ -316,7 +314,7 @@ export default function CheckoutContent() {
                   {paymentMethod === 'bkash' && (
                     <div className="text-sm text-text-light space-y-1">
                       <p>1. Go to bKash menu</p>
-                      <p>2. Choose "Send Money"</p>
+                      <p>2. Choose &quot;Send Money&quot;</p>
                       <p>3. Enter number: 015XXXXXXXX</p>
                       <p>4. Enter amount: ${totalPrice.toFixed(2)}</p>
                       <p>5. Enter reference: Order#{Date.now()}</p>
@@ -325,7 +323,7 @@ export default function CheckoutContent() {
                   {paymentMethod === 'nagad' && (
                     <div className="text-sm text-text-light space-y-1">
                       <p>1. Go to Nagad menu</p>
-                      <p>2. Choose "Send Money"</p>
+                      <p>2. Choose &quot;Send Money&quot;</p>
                       <p>3. Enter number: 013XXXXXXXX</p>
                       <p>4. Enter amount: ${totalPrice.toFixed(2)}</p>
                       <p>5. Enter reference: Order#{Date.now()}</p>

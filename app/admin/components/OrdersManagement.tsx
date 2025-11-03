@@ -3,9 +3,10 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAdminStore } from '@/lib/store/admin-store'
+import { Order } from '@/types'
 import AdminLayout from './AdminLayout'
 import { Button } from '@/components/ui/button'
-import { Search, Filter, Eye, Calendar } from 'lucide-react'
+import { Search, Eye, Calendar } from 'lucide-react'
 import Link from 'next/link'
 
 const statusFilters = ['all', 'pending', 'confirmed', 'shipped', 'delivered', 'cancelled']
@@ -34,7 +35,7 @@ export default function OrdersManagement() {
   })
 
   const handleStatusUpdate = (orderId: string, newStatus: string) => {
-    updateOrderStatus(orderId, newStatus as any)
+    updateOrderStatus(orderId, newStatus as Order['status'])
   }
 
   const getStatusColor = (status: string) => {

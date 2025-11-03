@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ChevronLeft, ChevronRight, Star, Truck, Shield, RotateCcw } from 'lucide-react'
+import { ChevronRight, Truck, Shield, RotateCcw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import ProductCard from '@/components/product/ProductCard'
 import { useCartStore } from '@/lib/store/cart-store'

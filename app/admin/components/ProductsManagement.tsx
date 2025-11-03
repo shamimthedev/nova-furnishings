@@ -9,7 +9,6 @@ import { Plus, Search, Edit, Trash2, Eye } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { products } from '@/lib/mock-data'
-import { Product } from '@/types'
 
 export default function ProductsManagement() {
   const router = useRouter()
