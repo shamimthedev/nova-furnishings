@@ -4,6 +4,7 @@ import './globals.css'
 import Header from '@/components/header/Header'
 import Footer from '@/components/footer/Footer'
 import BackToTop from '@/components/ui/BackToTop'
+import { Toaster } from 'sonner'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -53,9 +54,23 @@ export default function RootLayout({
       <body className="min-h-screen bg-background antialiased">
         <div className="flex flex-col min-h-screen">
           <Header/>
-          {children}
+          <main className="pt-20 flex-1">
+            {children}
+          </main>
           <Footer/>
           <BackToTop />
+          <Toaster 
+            position="top-right" 
+            richColors 
+            closeButton
+            toastOptions={{
+              style: {
+                background: 'white',
+                border: '1px solid #e5e7eb',
+              },
+              duration: 5000,
+            }}
+          />
         </div>
       </body>
     </html>
