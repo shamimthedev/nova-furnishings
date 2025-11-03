@@ -42,7 +42,7 @@ export default function Header() {
                 <Button
                     variant="ghost"
                     size="sm"
-                    className="md:hidden text-white"
+                    className="lg:hidden text-white"
                     onClick={() => setIsMobileMenuOpen(true)}
                 >
                     <Menu className="h-6 w-6" />
@@ -60,7 +60,7 @@ export default function Header() {
                 </Link>
 
                 {/* Desktop Navigation */}
-                <nav className="hidden md:flex items-center space-x-8">
+                <nav className="hidden lg:flex items-center space-x-8">
                     {navItems.map((item) => (
                         <Link
                             key={item.name}
