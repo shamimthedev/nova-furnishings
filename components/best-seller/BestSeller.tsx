@@ -3,11 +3,14 @@ import { bestSellers } from '@/lib/mock-data'
 
 export default function BestSeller() {
   return (
-    <section className="container-custom py-16 md:py-24 border-b border-border">
-      <h2 className="text-3xl font-semibold text-center mb-12">
+    <section className="container-custom py-12 md:py-16 lg:py-24 border-b border-border">
+      {/* Section Title */}
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-center mb-8 sm:mb-10 md:mb-12 px-4">
         Shop Best Sellers
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      
+      {/* Product Grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
         {bestSellers.map((product) => (
           <ProductCard
             key={product.id}
